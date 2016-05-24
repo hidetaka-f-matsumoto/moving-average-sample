@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+require 'time'
 require 'nokogiri'
 
 class Gpx
@@ -12,7 +13,7 @@ class Gpx
         lat: trkpt.xpath('@lat').to_s.to_f,
         lon: trkpt.xpath('@lon').to_s.to_f,
         ele: trkpt.css('ele').text.to_f,
-        time: trkpt.css('time').text.to_f
+        time: Time.parse(trkpt.css('time').text).to_i
       }
     end
   end
@@ -21,4 +22,4 @@ class Gpx
   end
 end
 
-#p Gpx.new(ARGV[0])
+# p Gpx.new(ARGV[0])
